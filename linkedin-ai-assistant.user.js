@@ -12,6 +12,15 @@
 
 (function() {
     'use strict';
+    
+    const DEBUG = true;
+    function log(...args) {
+        if (DEBUG) {
+            console.log('[LinkedIn AI Assistant]', ...args);
+        }
+    }
+
+    log('Script initialized');
 
     // Add custom styles
     GM_addStyle(`
@@ -45,6 +54,7 @@
     let activeBubble = null;
 
     async function generateComment(postContent) {
+        log('Generating comment for post:', postContent.substring(0, 50) + '...');
         try {
             const response = await openai.chat.completions.create({
                 model: "gpt-4",
@@ -62,11 +72,13 @@
             });
             return response.choices[0].message.content;
         } catch (error) {
+            log('Error generating comment:', error);
             throw new Error(`OpenAI Error: ${error.message}`);
         }
     }
 
     function createAIAssistButton() {
+        log('Creating AI Assist button');
         const button = document.createElement('button');
         button.className = 'ai-assist-button';
         button.textContent = 'AI Assist';
@@ -126,6 +138,7 @@
 
     // Setup observer to inject AI button
     const observer = new MutationObserver((mutations) => {
+        log('DOM mutation detected');
         mutations.forEach((mutation) => {
             if (mutation.addedNodes && mutation.addedNodes.length > 0) {
                 mutation.addedNodes.forEach((node) => {
