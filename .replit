@@ -1,0 +1,33 @@
+modules = ["nodejs-20", "python-3.11"]
+
+[nix]
+channel = "stable-24_05"
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Tampermonkey Script"
+
+[[workflows.workflow]]
+name = "Tampermonkey Script"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "packager.installForAll"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "node -e \"console.log('Tampermonkey script is ready for browser installation. Users can now:');console.log('1. Install Tampermonkey browser extension');console.log('2. Create new script');console.log('3. Copy and paste the entire contents of linkedin-ai-assistant.user.js');console.log('4. Save and enable the script');console.log('5. Navigate to LinkedIn and configure API keys in the settings panel')\""
+
+[deployment]
+run = ["sh", "-c", "node -e \"console.log('Tampermonkey script is ready for browser installation. Users can now:');console.log('1. Install Tampermonkey browser extension');console.log('2. Create new script');console.log('3. Copy and paste the entire contents of linkedin-ai-assistant.user.js');console.log('4. Save and enable the script');console.log('5. Navigate to LinkedIn and configure API keys in the settings panel')\""]

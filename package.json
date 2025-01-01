@@ -1,0 +1,16 @@
+{
+  "name": "linkedinai",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.33.1",
+    "openai": "^4.77.0"
+  }
+}
