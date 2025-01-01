@@ -7,7 +7,7 @@
 // @author       Your name
 // @match        https://www.linkedin.com/*
 // @grant        GM_addStyle
-// @require      https://cdn.jsdelivr.net/npm/openai@4.28.0/dist/browser.min.js
+// @require      https://cdn.jsdelivr.net/npm/openai@4.28.0/dist/browser/stream.min.js
 // ==/UserScript==
 
 (function() {
@@ -50,7 +50,7 @@
 
     // Hardcoded OpenAI configuration
     const OPENAI_KEY = 'YOUR-OPENAI-KEY-HERE'; // Replace with your actual OpenAI key
-    const openai = new OpenAI({ apiKey: OPENAI_KEY });
+    const openai = new window.OpenAI({ apiKey: OPENAI_KEY, dangerouslyAllowBrowser: true });
     let activeBubble = null;
 
     async function generateComment(postContent) {
