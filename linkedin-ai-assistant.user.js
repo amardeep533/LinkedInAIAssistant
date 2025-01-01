@@ -100,8 +100,9 @@
         button.className = 'ai-assist-button';
         button.textContent = 'AI Assist';
         button.onclick = async (e) => {
-            const post = e.target.closest('.feed-shared-update-v2');
-            const postContent = post.querySelector('.feed-shared-text').textContent;
+            const post = e.target.closest('.feed-shared-update-v2, .feed-shared-post');
+            const postContent = post.querySelector('.feed-shared-text, .feed-shared-post-text').textContent.trim();
+            log('Post content:', postContent);
             try {
                 const comment = await generateComment(postContent);
                 showPreviewBubble(comment, e.target);
@@ -157,18 +158,15 @@
 
     // Setup observer to inject AI button
     const observer = new MutationObserver((mutations) => {
-        log('DOM mutation detected');
         mutations.forEach((mutation) => {
-            if (mutation.addedNodes && mutation.addedNodes.length > 0) {
-                mutation.addedNodes.forEach((node) => {
-                    if (node.nodeType === 1 && node.matches('.feed-shared-update-v2')) {
-                        const actionsContainer = node.querySelector('.feed-shared-social-actions');
-                        if (actionsContainer && !actionsContainer.querySelector('.ai-assist-button')) {
-                            actionsContainer.insertBefore(createAIAssistButton(), actionsContainer.firstChild);
-                        }
-                    }
-                });
-            }
+            const feed = document.querySelectorAll('.feed-shared-update-v2, .feed-shared-post');
+            feed.forEach(post => {
+                const actionsContainer = post.querySelector('.social-actions-button-group, .feed-shared-social-actions');
+                if (actionsContainer && !actionsContainer.querySelector('.ai-assist-button')) {
+                    log('Injecting AI button');
+                    actionsContainer.insertBefore(createAIAssistButton(), actionsContainer.firstChild);
+                }
+            });
         });
     });
 
