@@ -188,20 +188,20 @@
 
         const content = `
             <h3>AI Assistant Settings</h3>
-            <div>
-                <label>Provider:</label>
-                <select id="ai-provider">
+            <div style="margin: 10px 0;">
+                <label style="display: block; margin-bottom: 5px;">Provider:</label>
+                <select id="ai-provider" style="width: 100%; padding: 5px;">
                     <option value="openai" ${settings.provider === 'openai' ? 'selected' : ''}>OpenAI</option>
                     <option value="anthropic" ${settings.provider === 'anthropic' ? 'selected' : ''}>Anthropic</option>
                 </select>
             </div>
-            <div>
-                <label>OpenAI API Key:</label>
-                <input type="password" id="openai-key" value="${settings.openaiKey || ''}">
+            <div style="margin: 10px 0;">
+                <label style="display: block; margin-bottom: 5px;">OpenAI API Key:</label>
+                <input type="password" id="openai-key" value="${settings.openaiKey || ''}" style="width: 100%; padding: 5px;">
             </div>
-            <div>
-                <label>Anthropic API Key:</label>
-                <input type="password" id="anthropic-key" value="${settings.anthropicKey || ''}">
+            <div style="margin: 10px 0;">
+                <label style="display: block; margin-bottom: 5px;">Anthropic API Key:</label>
+                <input type="password" id="anthropic-key" value="${settings.anthropicKey || ''}" style="width: 100%; padding: 5px;">
             </div>
         `;
 
