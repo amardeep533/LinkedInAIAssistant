@@ -209,15 +209,17 @@
 
         const saveButton = document.createElement('button');
         saveButton.textContent = 'Save';
-        saveButton.onclick = () => {
+        saveButton.style.cssText = 'background: #0a66c2; color: white; border: none; border-radius: 4px; padding: 8px 16px; margin-top: 16px; cursor: pointer; width: 100%;';
+        saveButton.addEventListener('click', () => {
             const newSettings = {
                 provider: document.getElementById('ai-provider').value,
                 openaiKey: document.getElementById('openai-key').value,
                 anthropicKey: document.getElementById('anthropic-key').value
             };
             saveSettings(newSettings);
+            initializeProvider();
             panel.remove();
-        };
+        });
 
         panel.appendChild(saveButton);
         document.body.appendChild(panel);
