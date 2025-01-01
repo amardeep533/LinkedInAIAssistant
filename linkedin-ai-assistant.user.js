@@ -7,7 +7,7 @@
 // @author       Your name
 // @match        https://www.linkedin.com/*
 // @grant        GM_addStyle
-// @require      https://cdn.jsdelivr.net/npm/openai-edge@1.2.2/dist/browser.js
+// @grant        GM_xmlhttpRequest
 // ==/UserScript==
 
 (function() {
@@ -48,34 +48,50 @@
         }
     `);
 
-    // Hardcoded OpenAI configuration
     const OPENAI_KEY = 'YOUR-OPENAI-KEY-HERE'; // Replace with your actual OpenAI key
-    const configuration = { apiKey: OPENAI_KEY };
-    const openai = new OpenAIAPI(configuration);
-    let activeBubble = null;
 
     async function generateComment(postContent) {
         log('Generating comment for post:', postContent.substring(0, 50) + '...');
-        try {
-            const response = await openai.chat.completions.create({
-                model: "gpt-4",
-                messages: [
-                    {
-                        role: "system",
-                        content: "You are a professional LinkedIn user. Generate an engaging, relevant comment for the given post."
-                    },
-                    {
-                        role: "user",
-                        content: postContent
+        
+        return new Promise((resolve, reject) => {
+            GM_xmlhttpRequest({
+                method: 'POST',
+                url: 'https://api.openai.com/v1/chat/completions',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${OPENAI_KEY}`
+                },
+                data: JSON.stringify({
+                    model: "gpt-4",
+                    messages: [
+                        {
+                            role: "system",
+                            content: "You are a professional LinkedIn user. Generate an engaging, relevant comment for the given post."
+                        },
+                        {
+                            role: "user",
+                            content: postContent
+                        }
+                    ],
+                    max_tokens: 150
+                }),
+                onload: function(response) {
+                    try {
+                        const data = JSON.parse(response.responseText);
+                        if (data.choices && data.choices[0] && data.choices[0].message) {
+                            resolve(data.choices[0].message.content);
+                        } else {
+                            reject(new Error('Invalid response format'));
+                        }
+                    } catch (error) {
+                        reject(error);
                     }
-                ],
-                max_tokens: 150
+                },
+                onerror: function(error) {
+                    reject(new Error('Network error'));
+                }
             });
-            return response.choices[0].message.content;
-        } catch (error) {
-            log('Error generating comment:', error);
-            throw new Error(`OpenAI Error: ${error.message}`);
-        }
+        });
     }
 
     function createAIAssistButton() {
@@ -128,6 +144,8 @@
         document.body.appendChild(bubble);
         activeBubble = bubble;
     }
+
+    let activeBubble = null;
 
     function showError(message) {
         const errorDiv = document.createElement('div');
