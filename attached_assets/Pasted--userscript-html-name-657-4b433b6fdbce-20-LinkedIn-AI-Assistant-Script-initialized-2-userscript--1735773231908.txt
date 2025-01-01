@@ -1,0 +1,118 @@
+
+﻿
+userscript.html?name…657-4b433b6fdbce:20 [LinkedIn AI Assistant] Script initialized
+2
+userscript.html?name…657-4b433b6fdbce:20 [LinkedIn AI Assistant] DOM mutation detected
+8giblh1qg6yr96zti5gr384p2:7633 
+ GET chrome-extension://invalid/ net::ERR_FAILED
+(anonymous)	@	8giblh1qg6yr96zti5gr384p2:7633
+(anonymous)	@	8giblh1qg6yr96zti5gr384p2:7632
+d	@	bj3clm1sijv6r6yhzui8nlaf3:1312
+(anonymous)	@	bj3clm1sijv6r6yhzui8nlaf3:1305
+C.forEach.e.<computed>	@	bj3clm1sijv6r6yhzui8nlaf3:1321
+u	@	8giblh1qg6yr96zti5gr384p2:7627
+a	@	8giblh1qg6yr96zti5gr384p2:7629
+(anonymous)	@	8giblh1qg6yr96zti5gr384p2:7629
+(anonymous)	@	8giblh1qg6yr96zti5gr384p2:7628
+(anonymous)	@	8giblh1qg6yr96zti5gr384p2:7636
+(anonymous)	@	8giblh1qg6yr96zti5gr384p2:7642
+d	@	bj3clm1sijv6r6yhzui8nlaf3:1312
+(anonymous)	@	bj3clm1sijv6r6yhzui8nlaf3:1305
+C.forEach.e.<computed>	@	bj3clm1sijv6r6yhzui8nlaf3:1321
+u	@	8giblh1qg6yr96zti5gr384p2:7627
+a	@	8giblh1qg6yr96zti5gr384p2:7629
+(anonymous)	@	8giblh1qg6yr96zti5gr384p2:7629
+(anonymous)	@	8giblh1qg6yr96zti5gr384p2:7628
+(anonymous)	@	8giblh1qg6yr96zti5gr384p2:7644
+(anonymous)	@	81stjzdz7081hv1vf4hpncczi:2308
+_	@	aobkn9vl8m0ru2zk7o4hw5h8v:7181
+y	@	aobkn9vl8m0ru2zk7o4hw5h8v:7180
+invokeWithOnError	@	aobkn9vl8m0ru2zk7o4hw5h8v:6104
+flush	@	aobkn9vl8m0ru2zk7o4hw5h8v:6088
+flush	@	aobkn9vl8m0ru2zk7o4hw5h8v:6116
+_end	@	aobkn9vl8m0ru2zk7o4hw5h8v:6218
+B._boundAutorunEnd	@	aobkn9vl8m0ru2zk7o4hw5h8v:6154
+Promise.then		
+n	@	aobkn9vl8m0ru2zk7o4hw5h8v:6059
+flush	@	aobkn9vl8m0ru2zk7o4hw5h8v:3446
+_scheduleAutorun	@	aobkn9vl8m0ru2zk7o4hw5h8v:6249
+_ensureInstance	@	aobkn9vl8m0ru2zk7o4hw5h8v:6247
+schedule	@	aobkn9vl8m0ru2zk7o4hw5h8v:6182
+(anonymous)	@	aobkn9vl8m0ru2zk7o4hw5h8v:1358
+v	@	aobkn9vl8m0ru2zk7o4hw5h8v:7169
+f	@	aobkn9vl8m0ru2zk7o4hw5h8v:7163
+(anonymous)	@	aobkn9vl8m0ru2zk7o4hw5h8v:7225
+requestAnimationFrame		
+(anonymous)	@	bj3clm1sijv6r6yhzui8nlaf3:18102
+requestAnimationFrame		
+(anonymous)	@	bj3clm1sijv6r6yhzui8nlaf3:18102
+invokeWithOnError	@	aobkn9vl8m0ru2zk7o4hw5h8v:6104
+flush	@	aobkn9vl8m0ru2zk7o4hw5h8v:6088
+flush	@	aobkn9vl8m0ru2zk7o4hw5h8v:6116
+_end	@	aobkn9vl8m0ru2zk7o4hw5h8v:6218
+B._boundAutorunEnd	@	aobkn9vl8m0ru2zk7o4hw5h8v:6154
+Promise.then		
+n	@	aobkn9vl8m0ru2zk7o4hw5h8v:6059
+flush	@	aobkn9vl8m0ru2zk7o4hw5h8v:3446
+_scheduleAutorun	@	aobkn9vl8m0ru2zk7o4hw5h8v:6249
+_end	@	aobkn9vl8m0ru2zk7o4hw5h8v:6220
+B._boundAutorunEnd	@	aobkn9vl8m0ru2zk7o4hw5h8v:6154
+Promise.then		
+n	@	aobkn9vl8m0ru2zk7o4hw5h8v:6059
+flush	@	aobkn9vl8m0ru2zk7o4hw5h8v:3446
+_scheduleAutorun	@	aobkn9vl8m0ru2zk7o4hw5h8v:6249
+_end	@	aobkn9vl8m0ru2zk7o4hw5h8v:6220
+B._boundAutorunEnd	@	aobkn9vl8m0ru2zk7o4hw5h8v:6154
+Promise.then		
+n	@	aobkn9vl8m0ru2zk7o4hw5h8v:6059
+flush	@	aobkn9vl8m0ru2zk7o4hw5h8v:3446
+_scheduleAutorun	@	aobkn9vl8m0ru2zk7o4hw5h8v:6249
+_end	@	aobkn9vl8m0ru2zk7o4hw5h8v:6220
+B._boundAutorunEnd	@	aobkn9vl8m0ru2zk7o4hw5h8v:6154
+Promise.then		
+n	@	aobkn9vl8m0ru2zk7o4hw5h8v:6059
+flush	@	aobkn9vl8m0ru2zk7o4hw5h8v:3446
+_scheduleAutorun	@	aobkn9vl8m0ru2zk7o4hw5h8v:6249
+_end	@	aobkn9vl8m0ru2zk7o4hw5h8v:6220
+B._boundAutorunEnd	@	aobkn9vl8m0ru2zk7o4hw5h8v:6154
+Promise.then		
+n	@	aobkn9vl8m0ru2zk7o4hw5h8v:6059
+flush	@	aobkn9vl8m0ru2zk7o4hw5h8v:3446
+_scheduleAutorun	@	aobkn9vl8m0ru2zk7o4hw5h8v:6249
+_end	@	aobkn9vl8m0ru2zk7o4hw5h8v:6220
+B._boundAutorunEnd	@	aobkn9vl8m0ru2zk7o4hw5h8v:6154
+Promise.then		
+n	@	aobkn9vl8m0ru2zk7o4hw5h8v:6059
+flush	@	aobkn9vl8m0ru2zk7o4hw5h8v:3446
+_scheduleAutorun	@	aobkn9vl8m0ru2zk7o4hw5h8v:6249
+_end	@	aobkn9vl8m0ru2zk7o4hw5h8v:6220
+B._boundAutorunEnd	@	aobkn9vl8m0ru2zk7o4hw5h8v:6154
+Promise.then		
+n	@	aobkn9vl8m0ru2zk7o4hw5h8v:6059
+flush	@	aobkn9vl8m0ru2zk7o4hw5h8v:3446
+_scheduleAutorun	@	aobkn9vl8m0ru2zk7o4hw5h8v:6249
+_ensureInstance	@	aobkn9vl8m0ru2zk7o4hw5h8v:6247
+schedule	@	aobkn9vl8m0ru2zk7o4hw5h8v:6182
+(anonymous)	@	aobkn9vl8m0ru2zk7o4hw5h8v:1358
+v	@	aobkn9vl8m0ru2zk7o4hw5h8v:7169
+p	@	aobkn9vl8m0ru2zk7o4hw5h8v:7162
+f	@	aobkn9vl8m0ru2zk7o4hw5h8v:7166
+(anonymous)	@	aobkn9vl8m0ru2zk7o4hw5h8v:7225
+E.l.onload	@	bj3clm1sijv6r6yhzui8nlaf3:1614
+(anonymous)	@	erg6r220z1w3s8zqu53bgu8uj:23
+(anonymous)	@	erg6r220z1w3s8zqu53bgu8uj:6
+dispatchEvent	@	erg6r220z1w3s8zqu53bgu8uj:6
+stateChange	@	erg6r220z1w3s8zqu53bgu8uj:33
+body	@	erg6r220z1w3s8zqu53bgu8uj:33
+fulfill	@	erg6r220z1w3s8zqu53bgu8uj:28
+fulfillPendingRequestsFor	@	erg6r220z1w3s8zqu53bgu8uj:79
+response	@	erg6r220z1w3s8zqu53bgu8uj:98
+t	@	erg6r220z1w3s8zqu53bgu8uj:103
+load		
+attachDataletEventListener	@	erg6r220z1w3s8zqu53bgu8uj:104
+(anonymous)	@	erg6r220z1w3s8zqu53bgu8uj:92
+create	@	erg6r220z1w3s8zqu53bgu8uj:92
+(anonymous)	@	erg6r220z1w3s8zqu53bgu8uj:107
+(anonymous)	@	erg6r220z1w3s8zqu53bgu8uj:110
+2
+userscript.html?name…657-4b433b6fdbce:20 [LinkedIn AI Assistant] DOM mutation detected
