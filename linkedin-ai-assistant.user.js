@@ -30,182 +30,124 @@
     };
 
     GM_addStyle(`
-        /* Adjust main LinkedIn content when assistant is open */
-        .ai-assistant-active .scaffold-layout__main {
-            margin-right: 300px !important;
-            transition: margin-right 0.3s ease;
-        }
-
         #ai-assistant-box {
-            position: fixed;
-            top: 0;
-            right: -300px; /* Start hidden */
-            bottom: 0;
-            z-index: 99999;
-            background: white;
-            border-left: 2px solid #0a66c2;
-            padding: 12px;
-            box-shadow: -2px 0 8px rgba(0,0,0,0.1);
-            width: 300px;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            transition: right 0.3s ease;
+            position: fixed !important;
+            top: 0 !important;
+            right: -300px !important;
+            bottom: 0 !important;
+            width: 300px !important;
+            background: white !important;
+            border-left: 2px solid #0a66c2 !important;
+            transition: right 0.3s ease !important;
+            z-index: 99999 !important;
         }
 
         #ai-assistant-box.visible {
-            right: 0;
+            right: 0 !important;
         }
 
         #ai-assistant-toggle {
-            position: fixed;
-            top: 50%;
-            right: 0;
-            transform: translateY(-50%);
-            background: #0a66c2;
-            color: white;
-            border: none;
-            border-radius: 4px 0 0 4px;
-            padding: 8px;
-            cursor: pointer;
-            z-index: 99999;
-            box-shadow: -2px 0 8px rgba(0,0,0,0.1);
-            writing-mode: vertical-lr;
-            text-orientation: mixed;
-            height: auto;
-            font-size: 12px;
-            transition: right 0.3s ease;
+            position: fixed !important;
+            top: 50% !important;
+            right: 0 !important;
+            transform: translateY(-50%) !important;
+            background: #0a66c2 !important;
+            color: white !important;
+            border: none !important;
+            border-radius: 4px 0 0 4px !important;
+            padding: 8px !important;
+            cursor: pointer !important;
+            z-index: 99999 !important;
+            writing-mode: vertical-lr !important;
+            text-orientation: mixed !important;
+            height: auto !important;
+            font-size: 12px !important;
+            transition: right 0.3s ease !important;
         }
 
         #ai-assistant-toggle.shifted {
-            right: 300px;
+            right: 300px !important;
         }
 
-        #ai-assistant-box h3 {
-            margin: 0 0 8px 0;
-            font-size: 14px;
-            color: #0a66c2;
+        #ai-assistant-box {
+            padding: 12px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            overflow: hidden !important;
         }
 
         .ai-button {
-            background: #0a66c2;
-            color: white;
-            border: none;
-            border-radius: 12px;
-            padding: 6px 12px;
-            cursor: pointer;
-            font-weight: 600;
-            margin: 3px;
-            font-size: 12px;
-            width: calc(100% - 6px);
-        }
-
-        .ai-generate-button {
-            background: #057642;
+            background: #0a66c2 !important;
+            color: white !important;
+            border: none !important;
+            border-radius: 12px !important;
+            padding: 6px 12px !important;
+            cursor: pointer !important;
+            font-weight: 600 !important;
+            margin: 3px !important;
+            font-size: 12px !important;
+            width: calc(100% - 6px) !important;
         }
 
         .ai-content {
-            margin: 8px 3px;
-            padding: 8px;
-            background: #f3f6f8;
-            border-radius: 4px;
-            font-size: 12px;
-            white-space: pre-wrap;
-            flex: 1;
-            overflow-y: auto;
-        }
-
-        .ai-nav-buttons {
-            display: flex;
-            gap: 3px;
-            margin: 3px;
+            margin: 8px 3px !important;
+            padding: 8px !important;
+            background: #f3f6f8 !important;
+            border-radius: 4px !important;
+            font-size: 12px !important;
+            white-space: pre-wrap !important;
+            flex: 1 !important;
+            overflow-y: auto !important;
         }
 
         .ai-status {
-            font-size: 11px;
-            color: #666;
-            margin: 3px;
+            font-size: 11px !important;
+            color: #666 !important;
+            margin: 3px !important;
         }
 
-        .ai-response {
-            position: relative;
-            padding-top: 24px !important;
-            margin-top: 8px;
+        .ai-nav-buttons {
+            display: flex !important;
+            gap: 3px !important;
+            margin: 3px !important;
         }
 
-        .ai-response-text {
-            background: white;
-            padding: 8px;
-            border-radius: 4px;
-            border: 1px solid #e0e0e0;
-            margin: 6px 0;
-            font-size: 12px;
-            line-height: 1.4;
+        .ai-nav-buttons .ai-button {
+            flex: 1 !important;
         }
 
         .ai-response-type {
-            width: 100%;
-            padding: 8px 24px 8px 12px;
-            margin: 3px 0;
-            border: 1px solid #0a66c2;
-            border-radius: 4px;
-            background: white url('data:image/svg+xml;charset=US-ASCII,<svg width="12" height="12" xmlns="http://www.w3.org/2000/svg"><path d="M2 4l4 4 4-4" stroke="%230a66c2" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>') no-repeat right 8px center;
-            font-size: 12px;
-            color: #000;
-            appearance: none;
-            -webkit-appearance: none;
-            cursor: pointer;
-            transition: border-color 0.2s, box-shadow 0.2s;
+            width: 100% !important;
+            padding: 8px 24px 8px 12px !important;
+            margin: 3px 0 !important;
+            border: 1px solid #0a66c2 !important;
+            border-radius: 4px !important;
+            background: white url('data:image/svg+xml;charset=US-ASCII,<svg width="12" height="12" xmlns="http://www.w3.org/2000/svg"><path d="M2 4l4 4 4-4" stroke="%230a66c2" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>') no-repeat right 8px center !important;
+            font-size: 12px !important;
+            color: #000 !important;
+            appearance: none !important;
+            -webkit-appearance: none !important;
+            cursor: pointer !important;
         }
 
-        .ai-response-type:hover {
-            border-color: #084e96;
-            background-color: #f8f9fa;
+        .ai-response {
+            position: relative !important;
+            padding-top: 24px !important;
+            margin-top: 8px !important;
         }
 
-        .ai-response-type:focus {
-            outline: none;
-            border-color: #0a66c2;
-            box-shadow: 0 0 0 2px rgba(10, 102, 194, 0.2);
+        .ai-response-text {
+            background: white !important;
+            padding: 8px !important;
+            border-radius: 4px !important;
+            border: 1px solid #e0e0e0 !important;
+            margin: 6px 0 !important;
+            font-size: 12px !important;
+            line-height: 1.4 !important;
         }
 
-        .ai-response-type option {
-            padding: 8px;
-            font-size: 12px;
-            background: white;
-            color: #000;
-        }
-
-        .ai-custom-prompt {
-            width: 100%;
-            padding: 6px;
-            margin: 3px 0;
-            border: 1px solid #0a66c2;
-            border-radius: 4px;
-            min-height: 48px;
-            font-size: 12px;
-            resize: vertical;
-            display: none;
-        }
-
-        .ai-copy-button {
-            position: absolute;
-            top: 2px;
-            right: 2px;
-            background: #057642;
-            color: white;
-            border: none;
-            border-radius: 2px;
-            padding: 1px 3px;
-            cursor: pointer;
-            font-size: 9px;
-            display: inline-flex;
-            align-items: center;
-            gap: 2px;
-            transition: all 0.2s;
-            line-height: 1;
-            height: 14px;
-            opacity: 0.8;
+        .ai-generate-button {
+            background: #057642 !important;
         }
     `);
 
@@ -384,29 +326,108 @@
         });
     }
 
+    // Add this function to create the settings modal
+    function createSettingsModal() {
+        const backdrop = document.createElement('div');
+        backdrop.className = 'ai-modal-backdrop';
+
+        const modal = document.createElement('div');
+        modal.className = 'ai-settings-modal';
+
+        modal.innerHTML = `
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <h3 style="margin: 0">AI Assistant Settings</h3>
+                <button style="background: none; border: none; font-size: 20px; cursor: pointer; color: #666;">×</button>
+            </div>
+            <form style="display: flex; flex-direction: column; gap: 12px;">
+                <div style="display: flex; flex-direction: column; gap: 4px;">
+                    <label style="font-size: 12px; font-weight: 600;">AI Model</label>
+                    <select id="ai-model" style="padding: 8px; border: 1px solid #0a66c2; border-radius: 4px; font-size: 12px;">
+                        <option value="gpt-4">GPT-4</option>
+                        <option value="gpt-4-turbo-preview">GPT-4 Turbo</option>
+                        <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
+                    </select>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 4px;">
+                    <label style="font-size: 12px; font-weight: 600;">API Key</label>
+                    <input type="password" id="ai-api-key" placeholder="Enter your OpenAI API key" 
+                        style="padding: 8px; border: 1px solid #0a66c2; border-radius: 4px; font-size: 12px;">
+                </div>
+                <button type="submit" class="ai-button" style="margin-top: 10px;">Save Settings</button>
+            </form>
+        `;
+
+        document.body.appendChild(backdrop);
+        document.body.appendChild(modal);
+
+        // Load saved settings
+        const savedSettings = JSON.parse(localStorage.getItem('ai-assistant-settings') || '{}');
+        if (savedSettings.apiKey) {
+            modal.querySelector('#ai-api-key').value = savedSettings.apiKey;
+        }
+        if (savedSettings.model) {
+            modal.querySelector('#ai-model').value = savedSettings.model;
+        }
+
+        // Handle form submission
+        modal.querySelector('form').onsubmit = (e) => {
+            e.preventDefault();
+            const settings = {
+                model: modal.querySelector('#ai-model').value,
+                apiKey: modal.querySelector('#ai-api-key').value
+            };
+            localStorage.setItem('ai-assistant-settings', JSON.stringify(settings));
+            OPENAI_CONFIG.apiKey = settings.apiKey;
+            OPENAI_CONFIG.model = settings.model;
+            closeModal();
+        };
+
+        // Close handlers
+        const closeModal = () => {
+            backdrop.classList.remove('visible');
+            modal.classList.remove('visible');
+        };
+
+        modal.querySelector('button').onclick = closeModal;
+        backdrop.onclick = closeModal;
+
+        return {
+            show: () => {
+                backdrop.classList.add('visible');
+                modal.classList.add('visible');
+            }
+        };
+    }
+
     // Create container with full functionality
     function createContainer() {
+        log('Creating container...');
+
         // Create toggle button
         const toggleButton = document.createElement('button');
         toggleButton.id = 'ai-assistant-toggle';
         toggleButton.textContent = 'AI Assistant ◀';
         document.body.appendChild(toggleButton);
 
-        // Create main container
+        // Create main container with basic structure
         const container = document.createElement('div');
         container.id = 'ai-assistant-box';
 
+        // Add title
         const title = document.createElement('h3');
         title.textContent = 'LinkedIn AI Assistant';
         title.style.margin = '0 0 10px 0';
 
+        // Add status
         const status = document.createElement('div');
         status.className = 'ai-status';
 
+        // Add analyze button
         const analyzeButton = document.createElement('button');
         analyzeButton.className = 'ai-button';
         analyzeButton.textContent = 'Analyze Visible Posts';
 
+        // Add navigation buttons
         const navButtons = document.createElement('div');
         navButtons.className = 'ai-nav-buttons';
 
@@ -423,49 +444,30 @@
         navButtons.appendChild(prevButton);
         navButtons.appendChild(nextButton);
 
+        // Add content area
         const content = document.createElement('div');
         content.className = 'ai-content';
         content.style.display = 'none';
 
-        const responseTypeSelect = document.createElement('select');
-        responseTypeSelect.className = 'ai-response-type';
-        Object.entries(RESPONSE_TYPES).forEach(([value, { label }]) => {
-            const option = document.createElement('option');
-            option.value = value;
-            option.textContent = label;
-            responseTypeSelect.appendChild(option);
-        });
-
-        const customPromptArea = document.createElement('textarea');
-        customPromptArea.className = 'ai-custom-prompt';
-        customPromptArea.placeholder = 'Enter your custom prompt here...';
-
-        responseTypeSelect.addEventListener('change', () => {
-            customPromptArea.style.display =
-                responseTypeSelect.value === 'custom' ? 'block' : 'none';
-        });
-
-        const generateButton = document.createElement('button');
-        generateButton.className = 'ai-button ai-generate-button';
-        generateButton.textContent = 'Generate AI Response';
-        generateButton.style.display = 'none';
-
+        // Add state variables
         let currentPosts = [];
         let currentIndex = 0;
 
+        // Update content display function
         async function updateContent(index) {
             if (index >= 0 && index < currentPosts.length) {
                 const extracted = await getPostContent(currentPosts[index]);
                 if (extracted) {
                     content.style.display = 'block';
                     content.textContent = `Post ${index + 1} of ${currentPosts.length}:\n\n${extracted.content}`;
-                    generateButton.style.display = 'block';
                     prevButton.style.display = index > 0 ? 'block' : 'none';
                     nextButton.style.display = index < currentPosts.length - 1 ? 'block' : 'none';
+                    generateButton.style.display = 'block';  // Show generate button
                 }
             }
         }
 
+        // Update analyze button functionality
         analyzeButton.onclick = async () => {
             currentPosts = getVisiblePosts();
             status.textContent = `Found ${currentPosts.length} visible posts`;
@@ -475,10 +477,12 @@
             } else {
                 content.style.display = 'block';
                 content.textContent = 'No visible posts found. Try scrolling to view posts.';
-                generateButton.style.display = 'none';
+                prevButton.style.display = 'none';
+                nextButton.style.display = 'none';
             }
         };
 
+        // Add navigation button handlers
         prevButton.onclick = async () => {
             if (currentIndex > 0) {
                 currentIndex--;
@@ -493,6 +497,23 @@
             }
         };
 
+        // Add response type selector
+        const responseTypeSelect = document.createElement('select');
+        responseTypeSelect.className = 'ai-response-type';
+        Object.entries(RESPONSE_TYPES).forEach(([value, { label }]) => {
+            const option = document.createElement('option');
+            option.value = value;
+            option.textContent = label;
+            responseTypeSelect.appendChild(option);
+        });
+
+        // Add generate button
+        const generateButton = document.createElement('button');
+        generateButton.className = 'ai-button ai-generate-button';
+        generateButton.textContent = 'Generate AI Response';
+        generateButton.style.display = 'none';
+
+        // Add generate button click handler
         generateButton.onclick = async () => {
             const currentPost = currentPosts[currentIndex];
             const extracted = await getPostContent(currentPost);
@@ -505,11 +526,9 @@
                 status.textContent = 'Generating AI response...';
 
                 const responseType = responseTypeSelect.value;
-                const customPrompt = customPromptArea.value;
                 const response = await generateAIResponse(
                     extracted.content,
-                    responseType,
-                    customPrompt
+                    responseType
                 );
 
                 // Create or update response display
@@ -565,114 +584,47 @@
             }
         };
 
+        // Add elements to container
         container.appendChild(title);
         container.appendChild(status);
         container.appendChild(analyzeButton);
         container.appendChild(navButtons);
         container.appendChild(content);
         container.appendChild(responseTypeSelect);
-        container.appendChild(customPromptArea);
         container.appendChild(generateButton);
 
-        // Add toggle functionality
+        document.body.appendChild(container);
+
+        // Toggle functionality (unchanged)
         toggleButton.addEventListener('click', () => {
-            const isVisible = container.classList.toggle('visible');
+            log('Toggle clicked');
+            container.classList.toggle('visible');
             toggleButton.classList.toggle('shifted');
-            toggleButton.textContent = isVisible ? 'AI Assistant ▶' : 'AI Assistant ◀';
-            document.body.classList.toggle('ai-assistant-active');
+            toggleButton.textContent = container.classList.contains('visible') ? 'AI Assistant ▶' : 'AI Assistant ◀';
         });
 
-        // Add close button inside container
-        const closeButton = document.createElement('button');
-        closeButton.style.cssText = `
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            background: none;
-            border: none;
-            color: #666;
-            cursor: pointer;
-            font-size: 18px;
-            padding: 4px;
-        `;
-        closeButton.textContent = '×';
-        closeButton.onclick = () => {
-            container.classList.remove('visible');
-            toggleButton.classList.remove('shifted');
-            toggleButton.textContent = 'AI Assistant ◀';
-            document.body.classList.remove('ai-assistant-active');
-        };
-
-        // Add close button as first child
-        container.insertBefore(closeButton, container.firstChild);
-
-        document.body.appendChild(container);
-        log('Container created with full functionality');
+        log('Container created successfully');
     }
 
     function init() {
         log('Initializing...');
 
-        function createElements() {
-            log('Creating elements...');
-
-            // First create and add the toggle button
-            if (!document.getElementById('ai-assistant-toggle')) {
-                const toggleButton = document.createElement('button');
-                toggleButton.id = 'ai-assistant-toggle';
-                toggleButton.textContent = 'AI Assistant ◀';
-                toggleButton.style.cssText = `
-                    position: fixed;
-                    top: 50%;
-                    right: 0;
-                    transform: translateY(-50%);
-                    background: #0a66c2;
-                    color: white;
-                    border: none;
-                    border-radius: 4px 0 0 4px;
-                    padding: 8px;
-                    cursor: pointer;
-                    z-index: 99999;
-                    box-shadow: -2px 0 8px rgba(0,0,0,0.1);
-                    writing-mode: vertical-lr;
-                    text-orientation: mixed;
-                    height: auto;
-                    font-size: 12px;
-                `;
-                document.body.appendChild(toggleButton);
-                log('Toggle button created');
-
-                // Only create container after toggle button exists
-                createContainer();
-            }
+        // Load saved settings
+        const savedSettings = JSON.parse(localStorage.getItem('ai-assistant-settings') || '{}');
+        if (savedSettings.apiKey) {
+            OPENAI_CONFIG.apiKey = savedSettings.apiKey;
+        }
+        if (savedSettings.model) {
+            OPENAI_CONFIG.model = savedSettings.model;
         }
 
-        // Try immediately
-        createElements();
-
-        // Also try after a short delay
-        setTimeout(createElements, 2000);
-
-        // And keep trying every second for up to 10 seconds
-        let attempts = 0;
-        const maxAttempts = 10;
-        const checkInterval = setInterval(() => {
-            log('Checking if elements exist...');
-            if (!document.getElementById('ai-assistant-toggle')) {
-                attempts++;
-                if (attempts < maxAttempts) {
-                    createElements();
-                } else {
-                    clearInterval(checkInterval);
-                    log('Failed to create elements after maximum attempts');
-                }
-            } else {
-                clearInterval(checkInterval);
-                log('Elements already exist');
-            }
-        }, 1000);
+        // Create elements if they don't exist
+        if (!document.getElementById('ai-assistant-toggle')) {
+            createContainer();
+        }
     }
 
+    // Call init when document is ready
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);
     } else {
@@ -680,4 +632,46 @@
     }
 
     log('Script loaded');
+
+    // Add this style verification
+    const verifyStyles = () => {
+        const container = document.getElementById('ai-assistant-box');
+        const toggle = document.getElementById('ai-assistant-toggle');
+        if (container && toggle) {
+            log('Container styles:', window.getComputedStyle(container));
+            log('Toggle styles:', window.getComputedStyle(toggle));
+        }
+    };
+
+    // Call this after container creation
+    setTimeout(verifyStyles, 1000);
+
+    // Add style for copy button
+    GM_addStyle(`
+        .ai-copy-button {
+            position: absolute !important;
+            top: 2px !important;
+            right: 2px !important;
+            background: #057642 !important;
+            color: white !important;
+            border: none !important;
+            border-radius: 2px !important;
+            padding: 2px 6px !important;
+            cursor: pointer !important;
+            font-size: 9px !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            min-width: 32px !important;
+            height: 16px !important;
+            opacity: 0.8 !important;
+            white-space: nowrap !important;
+            line-height: 1 !important;
+        }
+
+        .ai-copy-button:hover {
+            opacity: 1 !important;
+            background: #046235 !important;
+        }
+    `);
 })();
