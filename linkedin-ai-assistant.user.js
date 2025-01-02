@@ -24,10 +24,19 @@
 
     // OpenAI Configuration
     const OPENAI_CONFIG = {
-        apiKey: 'sk-your-actual-api-key-here',
-        model: 'gpt-4',
+        apiKey: '',  // Will be populated from localStorage
+        model: 'gpt-4',  // Default model, can be overridden by settings
         maxTokens: 150
     };
+
+    // Load saved settings at startup
+    const savedSettings = JSON.parse(localStorage.getItem('ai-assistant-settings') || '{}');
+    if (savedSettings.apiKey) {
+        OPENAI_CONFIG.apiKey = savedSettings.apiKey;
+    }
+    if (savedSettings.model) {
+        OPENAI_CONFIG.model = savedSettings.model;
+    }
 
     GM_addStyle(`
         #ai-assistant-box {
