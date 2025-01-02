@@ -3,7 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      1.0.0
 // @description  Simple AI comment helper for LinkedIn
-// @author       Your name
+// @author       Amardeep Singh
 // @match        https://www.linkedin.com/feed/*
 // @grant        GM_addStyle
 // @grant        GM_log
