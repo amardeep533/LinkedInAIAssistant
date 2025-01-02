@@ -367,20 +367,93 @@
         const modal = document.createElement('div');
         modal.className = 'ai-settings-modal';
 
-        // Simplest possible content
-        const content = document.createElement('div');
-        content.innerHTML = `
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <h3 style="margin: 0">Settings</h3>
-                <button id="modal-close">×</button>
-            </div>
-            <p style="margin-top: 15px">Settings content will go here</p>
-        `;
-        modal.appendChild(content);
+        // Create header
+        const header = document.createElement('div');
+        header.style.cssText = 'display: flex; justify-content: space-between; align-items: center;';
 
-        // Style the close button
-        const closeBtn = modal.querySelector('#modal-close');
+        const title = document.createElement('h3');
+        title.textContent = 'Settings';
+        title.style.margin = '0';
+
+        const closeBtn = document.createElement('button');
+        closeBtn.textContent = '×';
         closeBtn.style.cssText = 'background: none; border: none; font-size: 20px; cursor: pointer;';
+
+        header.appendChild(title);
+        header.appendChild(closeBtn);
+
+        // Create model selection
+        const modelContainer = document.createElement('div');
+        modelContainer.style.marginTop = '15px';
+
+        const modelLabel = document.createElement('label');
+        modelLabel.textContent = 'AI Model';
+        modelLabel.style.cssText = 'display: block; font-size: 12px; font-weight: 600; margin-bottom: 4px;';
+
+        const modelSelect = document.createElement('select');
+        modelSelect.id = 'ai-settings-model';
+        modelSelect.style.cssText = 'width: 100%; padding: 8px; border: 1px solid #0a66c2; border-radius: 4px; font-size: 12px;';
+
+        const models = [
+            { value: 'gpt-4', text: 'GPT-4' },
+            { value: 'gpt-4-turbo-preview', text: 'GPT-4 Turbo' },
+            { value: 'gpt-3.5-turbo', text: 'GPT-3.5 Turbo' }
+        ];
+
+        models.forEach(model => {
+            const option = document.createElement('option');
+            option.value = model.value;
+            option.textContent = model.text;
+            modelSelect.appendChild(option);
+        });
+
+        modelContainer.appendChild(modelLabel);
+        modelContainer.appendChild(modelSelect);
+
+        // Create API key input
+        const apiKeyContainer = document.createElement('div');
+        apiKeyContainer.style.marginTop = '15px';
+
+        const apiKeyLabel = document.createElement('label');
+        apiKeyLabel.textContent = 'OpenAI API Key';
+        apiKeyLabel.style.cssText = 'display: block; font-size: 12px; font-weight: 600; margin-bottom: 4px;';
+
+        const apiKeyInput = document.createElement('input');
+        apiKeyInput.type = 'password';
+        apiKeyInput.id = 'ai-settings-apikey';
+        apiKeyInput.placeholder = 'Enter your OpenAI API key';
+        apiKeyInput.style.cssText = 'width: 100%; padding: 8px; border: 1px solid #0a66c2; border-radius: 4px; font-size: 12px;';
+
+        // Load saved settings if they exist
+        const savedSettings = JSON.parse(localStorage.getItem('ai-assistant-settings') || '{}');
+        if (savedSettings.apiKey) {
+            apiKeyInput.value = savedSettings.apiKey;
+        }
+        if (savedSettings.model) {
+            modelSelect.value = savedSettings.model;
+        }
+
+        // Create save button
+        const saveButton = document.createElement('button');
+        saveButton.textContent = 'Save Settings';
+        saveButton.style.cssText = `
+            width: 100%;
+            padding: 8px;
+            background: #0a66c2;
+            color: white;
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 20px;
+        `;
+
+        apiKeyContainer.appendChild(apiKeyLabel);
+        apiKeyContainer.appendChild(apiKeyInput);
+
+        // Add new elements to modal
+        modal.appendChild(apiKeyContainer);
+        modal.appendChild(saveButton);
 
         // Close handlers
         const closeModal = () => {
@@ -393,6 +466,38 @@
 
         document.body.appendChild(backdrop);
         document.body.appendChild(modal);
+
+        // Add save button click handler
+        saveButton.onclick = () => {
+            const settings = {
+                apiKey: apiKeyInput.value,
+                model: modelSelect.value
+            };
+
+            // Save to localStorage
+            localStorage.setItem('ai-assistant-settings', JSON.stringify(settings));
+
+            // Update OPENAI_CONFIG
+            OPENAI_CONFIG.apiKey = settings.apiKey;
+            OPENAI_CONFIG.model = settings.model;
+
+            // Show success message
+            const successMsg = document.createElement('div');
+            successMsg.textContent = 'Settings saved successfully!';
+            successMsg.style.cssText = `
+                color: #057642;
+                font-size: 12px;
+                margin-top: 10px;
+                text-align: center;
+            `;
+            modal.appendChild(successMsg);
+
+            // Remove success message after 2 seconds
+            setTimeout(() => {
+                modal.removeChild(successMsg);
+                closeModal();
+            }, 2000);
+        };
 
         return {
             show: () => {
