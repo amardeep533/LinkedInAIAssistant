@@ -146,9 +146,11 @@
         }
 
         .ai-response-text {
+            position: relative !important;
             background: white !important;
-            padding: 8px !important;
-            border-radius: 4px !important;
+            padding: 16px !important;
+            padding-bottom: 48px !important; /* Space for the copy button */
+            border-radius: 8px !important;
             border: 1px solid #e0e0e0 !important;
             margin: 6px 0 !important;
             font-size: 12px !important;
@@ -392,6 +394,23 @@
         header.appendChild(closeBtn);
 
         // Create model selection
+        const models = [
+            { value: 'gpt-3.5-turbo', text: 'GPT-3.5 Turbo ($0.0015/1K tokens) - Fast & Economic' },
+            { value: 'gpt-3.5-turbo-16k', text: 'GPT-3.5 Turbo 16k ($0.003/1K tokens) - Extended Context' },
+            { value: 'claude-3-haiku-20240307', text: 'Claude 3 Haiku ($0.0025/1K tokens) - Fast & Efficient' },
+            { value: 'claude-3-sonnet-20240229', text: 'Claude 3 Sonnet ($0.003/1K tokens) - Balanced' },
+            { value: 'claude-3.5-sonnet-20240229', text: 'Claude 3.5 Sonnet ($0.003/1K tokens) - Latest Balanced' },
+            { value: 'gpt-4o-mini', text: 'GPT-4 Optimized Mini ($0.008/1K tokens) - Fast & Efficient' },
+            { value: 'gpt-4-turbo-preview', text: 'GPT-4 Turbo ($0.01/1K tokens) - Latest & Fast' },
+            { value: 'gpt-4o', text: 'GPT-4 Optimized ($0.012/1K tokens) - Best Performance/Cost' },
+            { value: 'claude-3-opus-20240229', text: 'Claude 3 Opus ($0.015/1K tokens) - Most Capable' },
+            { value: 'gpt-4', text: 'GPT-4 ($0.03/1K tokens) - Most Reliable' },
+            { value: 'gpt-4-vision-preview', text: 'GPT-4 Vision ($0.03/1K tokens) - Image Understanding' },
+            { value: 'gpt-4-32k', text: 'GPT-4 32k ($0.06/1K tokens) - Longest Context' },
+            { value: 'gpt-4-all-tools', text: 'GPT-4 All Tools ($0.08/1K tokens) - Full Capabilities' }
+        ];
+
+        // Create all elements first
         const modelContainer = document.createElement('div');
         modelContainer.style.marginTop = '15px';
 
@@ -403,12 +422,6 @@
         modelSelect.id = 'ai-settings-model';
         modelSelect.style.cssText = 'width: 100%; padding: 8px; border: 1px solid #0a66c2; border-radius: 4px; font-size: 12px;';
 
-        const models = [
-            { value: 'gpt-4', text: 'GPT-4' },
-            { value: 'gpt-4-turbo-preview', text: 'GPT-4 Turbo' },
-            { value: 'gpt-3.5-turbo', text: 'GPT-3.5 Turbo' }
-        ];
-
         models.forEach(model => {
             const option = document.createElement('option');
             option.value = model.value;
@@ -416,10 +429,6 @@
             modelSelect.appendChild(option);
         });
 
-        modelContainer.appendChild(modelLabel);
-        modelContainer.appendChild(modelSelect);
-
-        // Create API key input
         const apiKeyContainer = document.createElement('div');
         apiKeyContainer.style.marginTop = '15px';
 
@@ -433,13 +442,14 @@
         apiKeyInput.placeholder = 'Enter your OpenAI API key';
         apiKeyInput.style.cssText = 'width: 100%; padding: 8px; border: 1px solid #0a66c2; border-radius: 4px; font-size: 12px;';
 
-        // Load saved settings if they exist
+        // Now load saved settings after elements are created
         const savedSettings = JSON.parse(localStorage.getItem('ai-assistant-settings') || '{}');
         if (savedSettings.apiKey) {
             apiKeyInput.value = savedSettings.apiKey;
         }
         if (savedSettings.model) {
             modelSelect.value = savedSettings.model;
+            log('Setting model to:', savedSettings.model);  // Debug log
         }
 
         // Create save button
@@ -457,10 +467,11 @@
             margin-top: 20px;
         `;
 
-        apiKeyContainer.appendChild(apiKeyLabel);
-        apiKeyContainer.appendChild(apiKeyInput);
-
-        // Add new elements to modal
+        // Append everything to modal
+        modelContainer.appendChild(modelLabel);
+        modelContainer.appendChild(modelSelect);
+        modal.appendChild(header);
+        modal.appendChild(modelContainer);
         modal.appendChild(apiKeyContainer);
         modal.appendChild(saveButton);
 
@@ -677,48 +688,68 @@
                     responseType
                 );
 
-                // Create or update response display
+                // Update the response display creation
                 let responseDisplay = container.querySelector('.ai-response');
                 if (!responseDisplay) {
                     responseDisplay = document.createElement('div');
                     responseDisplay.className = 'ai-content ai-response';
-                    container.appendChild(responseDisplay);
                 }
 
-                responseDisplay.innerHTML = `
-                    <button class="ai-copy-button">
-                        Copy
-                    </button>
-                    <strong>AI Suggested Response:</strong>
-                    <div class="ai-response-text">${response.suggestion}</div>
-                    <small style="color: #666; margin-top: 8px; display: block;">
-                        Model: ${response.metadata.model}<br>
-                        Tokens: ${response.metadata.promptTokens + response.metadata.responseTokens}
-                    </small>
-                `;
-                responseDisplay.style.display = 'block';
+                // Clear previous content
+                responseDisplay.innerHTML = '';
 
-                // Add click handler for copy button
-                const copyButton = responseDisplay.querySelector('.ai-copy-button');
+                // Create elements individually
+                const titleEl = document.createElement('strong');
+                titleEl.textContent = 'AI Suggested Response:';
+                responseDisplay.appendChild(titleEl);
+
+                const responseTextDiv = document.createElement('div');
+                responseTextDiv.className = 'ai-response-text';
+                responseTextDiv.textContent = response.suggestion;
+
+                // Create copy button
+                const copyButton = document.createElement('button');
+                copyButton.className = 'ai-copy-button';
+                copyButton.title = 'Copy to clipboard';
+                copyButton.innerHTML = `
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                `;
+
+                // Add copy functionality
                 copyButton.addEventListener('click', async () => {
                     try {
                         await navigator.clipboard.writeText(response.suggestion);
-                        const originalText = copyButton.textContent;
-                        copyButton.textContent = '✓ Copied!';
-                        copyButton.style.background = '#2e7d32';
+                        copyButton.classList.add('success');
                         setTimeout(() => {
-                            copyButton.textContent = originalText;
-                            copyButton.style.background = '';
+                            copyButton.classList.remove('success');
                         }, 2000);
                     } catch (err) {
                         log('Copy failed:', err);
                         status.textContent = 'Failed to copy to clipboard';
-                        copyButton.textContent = '❌ Failed';
-                        setTimeout(() => {
-                            copyButton.textContent = originalText;
-                        }, 2000);
                     }
                 });
+
+                // Add copy button to response text div
+                responseTextDiv.appendChild(copyButton);
+                responseDisplay.appendChild(responseTextDiv);
+
+                // Add metadata
+                const metadataEl = document.createElement('small');
+                metadataEl.style.cssText = 'color: #666; margin-top: 8px; display: block;';
+                metadataEl.innerHTML = `
+                    Model: ${response.metadata.model}<br>
+                    Tokens: ${response.metadata.promptTokens + response.metadata.responseTokens}
+                `;
+                responseDisplay.appendChild(metadataEl);
+
+                // Make sure response display is visible and added to container
+                responseDisplay.style.display = 'block';
+                if (!container.contains(responseDisplay)) {
+                    container.appendChild(responseDisplay);
+                }
 
                 status.textContent = 'Response generated successfully';
             } catch (error) {
@@ -795,30 +826,60 @@
 
     // Add style for copy button
     GM_addStyle(`
+        .ai-response-text {
+            position: relative !important;
+            background: white !important;
+            padding: 16px !important;
+            padding-bottom: 48px !important; /* Space for the copy button */
+            border-radius: 8px !important;
+            border: 1px solid #e0e0e0 !important;
+            margin: 6px 0 !important;
+            font-size: 12px !important;
+            line-height: 1.4 !important;
+        }
+
         .ai-copy-button {
             position: absolute !important;
-            top: 2px !important;
-            right: 2px !important;
-            background: #057642 !important;
-            color: white !important;
-            border: none !important;
-            border-radius: 2px !important;
-            padding: 2px 6px !important;
-            cursor: pointer !important;
-            font-size: 9px !important;
-            display: inline-flex !important;
+            bottom: 12px !important;
+            right: 12px !important;
+            display: flex !important;
             align-items: center !important;
             justify-content: center !important;
-            min-width: 32px !important;
-            height: 16px !important;
-            opacity: 0.8 !important;
-            white-space: nowrap !important;
-            line-height: 1 !important;
+            gap: 6px !important;
+            padding: 6px 12px !important;
+            background: #f8f9fa !important;
+            border: 1px solid #e0e0e0 !important;
+            border-radius: 6px !important;
+            cursor: pointer !important;
+            font-size: 12px !important;
+            color: #666 !important;
+            transition: all 0.2s ease !important;
+        }
+
+        .ai-copy-button::before {
+            content: 'Copy' !important;
         }
 
         .ai-copy-button:hover {
-            opacity: 1 !important;
-            background: #046235 !important;
+            background: #f0f2f5 !important;
+            border-color: #d0d0d0 !important;
+            color: #333 !important;
+        }
+
+        .ai-copy-button svg {
+            width: 14px !important;
+            height: 14px !important;
+            stroke: currentColor !important;
+        }
+
+        .ai-copy-button.success {
+            background: #e7f7ed !important;
+            border-color: #a8e5bd !important;
+            color: #057642 !important;
+        }
+
+        .ai-copy-button.success::before {
+            content: 'Copied!' !important;
         }
     `);
 })();
