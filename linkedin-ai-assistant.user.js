@@ -151,6 +151,39 @@
         }
     `);
 
+    // Add these styles first
+    GM_addStyle(`
+        .ai-modal-backdrop {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            background: rgba(0,0,0,0.5) !important;
+            z-index: 99999 !important;
+            display: none !important;
+        }
+
+        .ai-settings-modal {
+            position: fixed !important;
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            background: white !important;
+            padding: 20px !important;
+            border-radius: 8px !important;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+            z-index: 100000 !important;
+            width: 400px !important;
+            display: none !important;
+        }
+
+        .ai-modal-backdrop.visible,
+        .ai-settings-modal.visible {
+            display: block !important;
+        }
+    `);
+
     // Function to get visible posts
     function getVisiblePosts() {
         const posts = document.querySelectorAll('div.feed-shared-update-v2, div[data-urn]');
@@ -334,53 +367,20 @@
         const modal = document.createElement('div');
         modal.className = 'ai-settings-modal';
 
-        modal.innerHTML = `
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                <h3 style="margin: 0">AI Assistant Settings</h3>
-                <button style="background: none; border: none; font-size: 20px; cursor: pointer; color: #666;">×</button>
+        // Simplest possible content
+        const content = document.createElement('div');
+        content.innerHTML = `
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h3 style="margin: 0">Settings</h3>
+                <button id="modal-close">×</button>
             </div>
-            <form style="display: flex; flex-direction: column; gap: 12px;">
-                <div style="display: flex; flex-direction: column; gap: 4px;">
-                    <label style="font-size: 12px; font-weight: 600;">AI Model</label>
-                    <select id="ai-model" style="padding: 8px; border: 1px solid #0a66c2; border-radius: 4px; font-size: 12px;">
-                        <option value="gpt-4">GPT-4</option>
-                        <option value="gpt-4-turbo-preview">GPT-4 Turbo</option>
-                        <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
-                    </select>
-                </div>
-                <div style="display: flex; flex-direction: column; gap: 4px;">
-                    <label style="font-size: 12px; font-weight: 600;">API Key</label>
-                    <input type="password" id="ai-api-key" placeholder="Enter your OpenAI API key" 
-                        style="padding: 8px; border: 1px solid #0a66c2; border-radius: 4px; font-size: 12px;">
-                </div>
-                <button type="submit" class="ai-button" style="margin-top: 10px;">Save Settings</button>
-            </form>
+            <p style="margin-top: 15px">Settings content will go here</p>
         `;
+        modal.appendChild(content);
 
-        document.body.appendChild(backdrop);
-        document.body.appendChild(modal);
-
-        // Load saved settings
-        const savedSettings = JSON.parse(localStorage.getItem('ai-assistant-settings') || '{}');
-        if (savedSettings.apiKey) {
-            modal.querySelector('#ai-api-key').value = savedSettings.apiKey;
-        }
-        if (savedSettings.model) {
-            modal.querySelector('#ai-model').value = savedSettings.model;
-        }
-
-        // Handle form submission
-        modal.querySelector('form').onsubmit = (e) => {
-            e.preventDefault();
-            const settings = {
-                model: modal.querySelector('#ai-model').value,
-                apiKey: modal.querySelector('#ai-api-key').value
-            };
-            localStorage.setItem('ai-assistant-settings', JSON.stringify(settings));
-            OPENAI_CONFIG.apiKey = settings.apiKey;
-            OPENAI_CONFIG.model = settings.model;
-            closeModal();
-        };
+        // Style the close button
+        const closeBtn = modal.querySelector('#modal-close');
+        closeBtn.style.cssText = 'background: none; border: none; font-size: 20px; cursor: pointer;';
 
         // Close handlers
         const closeModal = () => {
@@ -388,8 +388,11 @@
             modal.classList.remove('visible');
         };
 
-        modal.querySelector('button').onclick = closeModal;
+        closeBtn.onclick = closeModal;
         backdrop.onclick = closeModal;
+
+        document.body.appendChild(backdrop);
+        document.body.appendChild(modal);
 
         return {
             show: () => {
@@ -398,6 +401,25 @@
             }
         };
     }
+
+    // Add style for settings button
+    GM_addStyle(`
+        .ai-settings-button {
+            position: absolute !important;
+            top: 8px !important;
+            right: 32px !important;
+            background: none !important;
+            border: none !important;
+            color: #666 !important;
+            cursor: pointer !important;
+            font-size: 16px !important;
+            padding: 4px !important;
+        }
+
+        .ai-settings-button:hover {
+            color: #0a66c2 !important;
+        }
+    `);
 
     // Create container with full functionality
     function createContainer() {
@@ -417,6 +439,16 @@
         const title = document.createElement('h3');
         title.textContent = 'LinkedIn AI Assistant';
         title.style.margin = '0 0 10px 0';
+
+        // Add settings button
+        const settingsButton = document.createElement('button');
+        settingsButton.className = 'ai-settings-button';
+        settingsButton.innerHTML = '⚙️';
+        settingsButton.title = 'Settings';
+
+        // Create settings modal and connect it to button
+        const settingsModal = createSettingsModal();
+        settingsButton.onclick = () => settingsModal.show();
 
         // Add status
         const status = document.createElement('div');
@@ -586,6 +618,7 @@
 
         // Add elements to container
         container.appendChild(title);
+        container.appendChild(settingsButton);
         container.appendChild(status);
         container.appendChild(analyzeButton);
         container.appendChild(navButtons);
